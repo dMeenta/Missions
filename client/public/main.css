@@ -228,13 +228,9 @@ textarea{
     justify-content: center;
 }
 
-.create-mission-form button:disabled{
-    background-color: #3D0C11;
-    color: #615348;
-    cursor: default;
-}
 
-.modal button:disabled{
+
+button:disabled{
     background-color: #450c13;
     color: #7e6b5d;
     cursor: default;

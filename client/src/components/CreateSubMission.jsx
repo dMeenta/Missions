@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SubMission from "./SubMission";
 const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
 export default function CreateSubMission(props) {
@@ -33,7 +34,10 @@ export default function CreateSubMission(props) {
                 className="mission-input"
                 placeholder="Añadir Sub Misión..."
             />
-            <button className="action-btn" type="submit">+</button>
+            {content.length === 0 ?
+                <button className="action-btn" disabled type="submit">+</button> :
+                <button className="action-btn" type="submit">+</button>
+            }
         </form>
     )
 }
