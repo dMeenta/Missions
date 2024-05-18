@@ -31,7 +31,7 @@ export default function EditMissionModal(props) {
                 title: "",
                 description: ""
             });
-            location.reload();
+            window.location.replace(url);
         } catch (err) {
             console.log(err);
         }
