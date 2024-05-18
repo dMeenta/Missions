@@ -26,7 +26,7 @@ export default function CreateMission() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       })
-      window.location = "/";
+      location.reload();
     } catch (err) {
       console.log(err);
     }
