@@ -18,13 +18,11 @@ export default function EditMissionModal(props) {
         });
     }
 
-    async function saveMission(e) {
-        e.preventDefault();
+    async function saveMission() {
         props.onEdit();
-        location.reload();
         try {
             const body = mission;
-            const result = fetch(`${url}/missions/${props.id}`, {
+            await fetch(`${url}/missions/${props.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)

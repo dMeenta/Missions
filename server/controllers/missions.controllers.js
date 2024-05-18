@@ -12,7 +12,9 @@ async function getAllMissions(req, res, next) {
 async function postMission(req, res, next) {
     const { title, description } = req.body;
     try {
-        const result = await pool.query("INSERT INTO missions (title, description) VALUES ($1, $2);", [title, description]);
+        await pool.query(
+            "INSERT INTO missions (title, description) VALUES ($1, $2);", [title, description]
+        );
         res.send("Successfully added");
     } catch (err) {
         next(err);
@@ -34,8 +36,9 @@ async function editMission(req, res, next) {
     const id = req.params.id;
     const { title, description } = req.body;
     try {
-        const result = await pool.query("UPDATE missions SET (title, description) = ($1,$2) WHERE id=$3;",
-            [title, description, id]);
+        await pool.query(
+            "UPDATE missions SET (title, description) = ($1,$2) WHERE id=$3;", [title, description, id]
+        );
         res.send("Successfully updated");
     } catch (err) {
         next(err);
@@ -45,7 +48,7 @@ async function editMission(req, res, next) {
 async function deleteMission(req, res, next) {
     const id = req.params.id;
     try {
-        const result = await pool.query(
+        await pool.query(
             `BEGIN TRANSACTION; DELETE FROM sub_missions WHERE mission_id = ${id}; DELETE FROM missions WHERE id = ${id}; COMMIT;`
         )
         res.send("Successfully deleted");
@@ -80,7 +83,7 @@ async function postSubmission(req, res, next) {
 async function deleteSubmission(req, res, next) {
     const id = req.params.id;
     try {
-        const result = await pool.query(
+        await pool.query(
             "DELETE FROM sub_missions WHERE id = $1;", [id]
         );
         res.send("Successfully deleted");

@@ -18,12 +18,10 @@ export default function CreateMission() {
     });
   }
 
-  async function submitMission(e) {
-    e.preventDefault();
-    location.reload();
+  async function submitMission() {
     try {
       const body = mission;
-      const result = fetch(`${url}/missions`, {
+      await fetch(`${url}/missions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
