@@ -1,7 +1,7 @@
 import { useState } from "react";
 const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
-export default function CreateMission() {
+export default function CreateMission(props) {
   const [mission, setMission] = useState({
     title: "",
     description: ""
@@ -18,13 +18,20 @@ export default function CreateMission() {
     });
   }
 
-  async function submitMission() {
+  async function submitMission(evnt) {
+    evnt.preventDefault();
     try {
       const body = mission;
       const result = await fetch(`${url}/missions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
+      })
+      props.missionRefresher();
+      alert("Misión Agregada Exitosamente.");
+      setMission({
+        title: "",
+        description: ""
       })
     } catch (err) {
       console.log(err);
@@ -33,7 +40,6 @@ export default function CreateMission() {
 
   return (
     <form className="create-mission-form" onSubmit={submitMission} action="POST">
-      <h2>Crear una nueva misión</h2>
       <input
         name="title"
         type="text"

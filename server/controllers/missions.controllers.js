@@ -2,7 +2,7 @@ const pool = require('../db');
 
 async function getAllMissions(req, res, next) {
     try {
-        const result = await pool.query("SELECT * FROM missions");
+        const result = await pool.query("SELECT * FROM missions ORDER BY id DESC");
         res.json(result.rows);
     } catch (err) {
         next(err);

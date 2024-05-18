@@ -27,11 +27,11 @@ export default function EditMissionModal(props) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             })
+            props.missionRefresher();
             setMission({
                 title: "",
                 description: ""
             });
-            location.replace(`${url}`);
         } catch (err) {
             console.log(err);
         }

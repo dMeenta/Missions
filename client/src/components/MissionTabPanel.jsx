@@ -16,7 +16,7 @@ export default function MissionTabPanel(props) {
 
     useEffect(() => {
         getMissions();
-    }, []);
+    }, [props.missionRefresh]);
 
     return (
         <div className="mssn-tab-panel">

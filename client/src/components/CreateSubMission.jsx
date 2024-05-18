@@ -14,7 +14,7 @@ export default function CreateSubMission(props) {
                 body: JSON.stringify(body)
             });
             setContent("");
-            props.onAux();
+            props.subMissionRefresher();
         } catch (err) {
             console.error(err.message);
         }

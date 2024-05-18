@@ -6,6 +6,12 @@ import TabPanel from "./TabPanel";
 export default function App() {
     const year = new Date().getFullYear();
     const [activeTab, setActiveTab] = useState(0);
+    const [missionRefresh, setMissionRefresh] = useState(false);
+
+    function missionRefresher() {
+        setMissionRefresh(!missionRefresh);
+    }
+
     function changeToCreateStatus() {
         setActiveTab(0);
     }
@@ -21,14 +27,17 @@ export default function App() {
                     <MissionTabPanel
                         activeTab={activeTab}
                         onClick={setActiveTab}
+                        missionRefresh={missionRefresh}
                     />
                 </section>
                 <section className="mission-display">
                     {
                         activeTab === 0 ?
-                            <CreateMission /> :
+                            <CreateMission missionRefresher={missionRefresher} /> :
                             <TabPanel
                                 activeTab={activeTab}
+                                missionRefresh={missionRefresh}
+                                missionRefresher={missionRefresher}
                             />
                     }
                 </section>

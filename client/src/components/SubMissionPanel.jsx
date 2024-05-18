@@ -17,11 +17,7 @@ export default function SubMissionPanel(props) {
 
     useEffect(() => {
         getSubMissions();
-    }, [props.id]);
-
-    useEffect(() => {
-        getSubMissions();
-    }, [props.aux]);
+    }, [props.id, props.submissionRefresh]);
 
     return (
         <div className="submissions-panel">
