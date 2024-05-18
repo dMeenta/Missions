@@ -32,7 +32,7 @@ export default function TabPanel(props) {
   }, [props.activeTab, edit]);
 
   async function deleteMission() {
-    window.location = "/";
+    location.reload();
     try {
       const result = await fetch(`${url}/missions/${id}`, {
         method: "DELETE"
