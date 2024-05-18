@@ -18,8 +18,7 @@ export default function CreateMission() {
     });
   }
 
-  async function submitMission(evnt) {
-    evnt.preventDefault();
+  async function submitMission() {
     try {
       const body = mission;
       const result = await fetch(`${url}/missions`, {
