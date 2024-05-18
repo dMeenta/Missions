@@ -6,8 +6,7 @@ const port = process.env.PORT || 3001;
 const taskRoutes = require('./routes/missions.routes');
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    "methods": "GET,PUT,POST,DELETE",
+    origin: process.env.FRONTEND_URL || "http://localhost:5173"
 }));
 app.use(express.json());
 app.use(taskRoutes);
