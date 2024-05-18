@@ -18,8 +18,8 @@ export default function CreateMission() {
     });
   }
 
-  async function submitMission() {
-    window.location.replace(`${url}`);
+  async function submitMission(evnt) {
+    evnt.preventDefault();
     try {
       const body = mission;
       const result = await fetch(`${url}/missions`, {
@@ -27,6 +27,7 @@ export default function CreateMission() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       })
+      window.location.replace(`${url}`);
     } catch (err) {
       console.log(err);
     }

@@ -20,6 +20,7 @@ export default function EditMissionModal(props) {
 
     async function saveMission() {
         props.onEdit();
+        evnt.preventDefault();
         window.location.replace(`${url}`);
         try {
             const body = mission;
@@ -32,6 +33,7 @@ export default function EditMissionModal(props) {
                 title: "",
                 description: ""
             });
+            window.location.replace(`${url}`);
         } catch (err) {
             console.log(err);
         }
