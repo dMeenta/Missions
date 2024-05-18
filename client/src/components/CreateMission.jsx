@@ -40,6 +40,7 @@ export default function CreateMission(props) {
 
   return (
     <form className="create-mission-form" onSubmit={submitMission} action="POST">
+      <h2>Crear una nueva misión</h2>
       <input
         name="title"
         type="text"
