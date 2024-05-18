@@ -18,10 +18,8 @@ export default function EditMissionModal(props) {
         });
     }
 
-    async function saveMission(evnt) {
-        evnt.preventDefault();
+    async function saveMission() {
         props.onEdit();
-        location.reload();
         try {
             const body = mission;
             const result = await fetch(`${url}/missions/${props.id}`, {

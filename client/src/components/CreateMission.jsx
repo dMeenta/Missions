@@ -18,8 +18,7 @@ export default function CreateMission() {
     });
   }
 
-  async function submitMission(evnt) {
-    evnt.preventDefault();
+  async function submitMission() {
     location.reload();
     try {
       const body = mission;
