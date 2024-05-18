@@ -19,7 +19,6 @@ export default function CreateMission() {
   }
 
   async function submitMission() {
-    location.reload();
     try {
       const body = mission;
       const result = await fetch(`${url}/missions`, {
@@ -27,6 +26,7 @@ export default function CreateMission() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       })
+      window.location = "/";
     } catch (err) {
       console.log(err);
     }

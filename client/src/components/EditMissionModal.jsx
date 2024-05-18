@@ -20,6 +20,7 @@ export default function EditMissionModal(props) {
 
     async function saveMission() {
         props.onEdit();
+        window.location = "/"
         try {
             const body = mission;
             const result = await fetch(`${url}/missions/${props.id}`, {
