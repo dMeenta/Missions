@@ -38,6 +38,7 @@ export default function App() {
                                 activeTab={activeTab}
                                 missionRefresh={missionRefresh}
                                 missionRefresher={missionRefresher}
+                                onDelete={changeToCreateStatus}
                             />
                     }
                 </section>

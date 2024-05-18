@@ -32,13 +32,12 @@ export default function TabPanel(props) {
   }, [props.missionRefresh, id]);
 
   async function deleteMission() {
-    //Falta arreglar en el deployment
-    location.reload();
+    props.onDelete();
     try {
       const result = await fetch(`${url}/missions/${id}`, {
         method: "DELETE"
-      }
-      );
+      });
+      props.missionRefresher();
     } catch (err) {
       console.log(err);
     }
