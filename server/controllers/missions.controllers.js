@@ -13,7 +13,7 @@ async function postMission(req, res, next) {
     const { title, description } = req.body;
     try {
         const result = await pool.query("INSERT INTO missions (title, description) VALUES ($1, $2);", [title, description]);
-        res.json(result.rows);
+        res.send("Successfully added");
     } catch (err) {
         next(err);
     }
@@ -36,7 +36,7 @@ async function editMission(req, res, next) {
     try {
         const result = await pool.query("UPDATE missions SET (title, description) = ($1,$2) WHERE id=$3;",
             [title, description, id]);
-        res.json(result.rows)
+        res.send("Successfully updated");
     } catch (err) {
         next(err);
     }
