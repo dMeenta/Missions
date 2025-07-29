@@ -2,22 +2,24 @@ const { Router } = require('express');
 
 const { getAllMissions, postMission, getMission, getAllSubmissions, postSubmission, deleteSubmission, editMission, deleteMission } = require('../controllers/missions.controllers');
 
+const attachUserId = require('../middleware/attachUserId')
+
 const router = Router();
 
-router.get("/missions", getAllMissions)
+router.get("/missions", attachUserId, getAllMissions)
 
-router.post("/missions", postMission)
+router.post("/missions", attachUserId, postMission)
 
-router.get("/missions/:id", getMission)
+router.get("/missions/:id", attachUserId, getMission)
 
-router.put("/missions/:id", editMission)
+router.put("/missions/:id", attachUserId, editMission)
 
-router.delete("/missions/:id", deleteMission)
+router.delete("/missions/:id", attachUserId, deleteMission)
 
-router.get("/sub/:id", getAllSubmissions)
+router.get("/sub/:id", attachUserId, getAllSubmissions)
 
-router.post("/sub/:id", postSubmission)
+router.post("/sub/:id", attachUserId, postSubmission)
 
-router.delete("/sub/:id", deleteSubmission)
+router.delete("/sub/:id", attachUserId, deleteSubmission)
 
 module.exports = router;

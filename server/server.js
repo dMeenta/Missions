@@ -2,17 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3001;
-const missionRoutes = require('./routes/missions.routes');
+const missionsRoutes = require('./routes/missions.routes');
 
 app.use(cors({
     origin: process.env.FRONTEND_URL || "http://localhost:5173"
 }));
 app.use(express.json());
-app.use(missionRoutes);
+app.use(missionsRoutes);
 app.use((err, req, res, next) => {
-    return res.json({
+    res.status(500).json({
+        error: 'Internal Server Error',
         message: err.message
-    })
+    });
+
 })
 
 app.listen(port, () => {
