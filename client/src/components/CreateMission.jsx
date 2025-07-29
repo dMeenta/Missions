@@ -1,5 +1,6 @@
 import { useState } from "react";
-const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+import getOrCreateUserId from "../utils/userId";
+const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
 export default function CreateMission(props) {
   const [mission, setMission] = useState({
@@ -22,9 +23,10 @@ export default function CreateMission(props) {
     evnt.preventDefault();
     try {
       const body = mission;
-      const result = await fetch(`${url}/missions`, {
+      const userId = getOrCreateUserId()
+      const result = await fetch(`${URL}/missions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-user-id": userId },
         body: JSON.stringify(body)
       })
       props.missionRefresher();
@@ -49,6 +51,7 @@ export default function CreateMission(props) {
         className="mission-input"
         placeholder="Ingrese el título de la misión"
         id="title"
+        autoComplete="false"
       />
       <textarea
         name="description"
@@ -59,10 +62,7 @@ export default function CreateMission(props) {
         placeholder="Ingrese la descripción de la misión..."
         id="description"
       />
-      {mission.title.length === 0 || mission.description.length === 0 ?
-        <button className="action-btn" disabled type="submit">Guardar</button> :
-        <button className="action-btn" type="submit">Guardar</button>
-      }
+      <button className="action-btn" disabled={mission.title.length === 0 || mission.description.length === 0} type="submit">Guardar</button>
     </form>
   )
 }

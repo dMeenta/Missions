@@ -22,9 +22,10 @@ export default function EditMissionModal(props) {
         props.onEdit();
         try {
             const body = mission;
+            const userId = getOrCreateUserId()
             const result = await fetch(`${url}/missions/${props.id}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "x-user-id": userId },
                 body: JSON.stringify(body)
             })
             props.missionRefresher();
@@ -47,6 +48,7 @@ export default function EditMissionModal(props) {
                     onChange={changeHandler}
                     value={mission.title}
                     className="mission-input"
+                    autoComplete="false"
                     placeholder="Ingrese el título de la misión..."
                     id="title"
                 />
@@ -59,12 +61,10 @@ export default function EditMissionModal(props) {
                     placeholder="Ingrese la descripción de la misión..."
                     id="description"
                 />
-                {mission.title.length === 0 || mission.description.length === 0 ?
-                    <button className="action-btn" disabled type="submit">Guardar</button> :
-                    <button className="action-btn" type="submit">Guardar</button>
-                }
+
+                <button className="action-btn" disabled={mission.title.length === 0 || mission.description.length === 0} type="submit">Guardar</button>
                 <button className="action-btn" onClick={() => { props.onEdit() }}>Cancelar</button>
             </form>
-        </div >
+        </div>
     )
 }

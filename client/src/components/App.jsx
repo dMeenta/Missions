@@ -44,7 +44,7 @@ export default function App() {
                 </section>
             </main>
             <footer>
-                <p>Diego Quipuzco © {year}</p>
+                <a href="https://www.linkedin.com/in/dquipuzco/" target="_blank">Diego Quipuzco © {year}</a>
             </footer>
         </div>
     )

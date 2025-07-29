@@ -228,11 +228,8 @@ textarea{
     justify-content: center;
 }
 
-
-
 button:disabled{
     background-color: #450c13;
     color: #7e6b5d;
     cursor: default;
 }
-

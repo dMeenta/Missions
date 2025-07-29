@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SubMission from "./SubMission";
+import getOrCreateUserId from "../utils/userId";
 const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
 export default function CreateSubMission(props) {
@@ -9,9 +10,10 @@ export default function CreateSubMission(props) {
         evnt.preventDefault();
         try {
             const body = { content };
+            const userId = getOrCreateUserId()
             const result = await fetch(`${url}/sub/${props.id}`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "x-user-id": userId },
                 body: JSON.stringify(body)
             });
             setContent("");
@@ -33,11 +35,9 @@ export default function CreateSubMission(props) {
                 onChange={changeHandler}
                 className="mission-input"
                 placeholder="Añadir Sub Misión..."
+                autoComplete="false"
             />
-            {content.length === 0 ?
-                <button className="action-btn" disabled type="submit">+</button> :
-                <button className="action-btn" type="submit">+</button>
-            }
+            <button className="action-btn" disabled={content.length === 0} type="submit">+</button>
         </form>
     )
 }

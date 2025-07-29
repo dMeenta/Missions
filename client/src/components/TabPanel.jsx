@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CreateSubMission from "./CreateSubMission";
 import SubMissionPanel from "./SubMissionPanel";
 import EditMissionModal from "./EditMissionModal";
+import getOrCreateUserId from "../utils/userId";
 const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
 export default function TabPanel(props) {
@@ -20,7 +21,11 @@ export default function TabPanel(props) {
 
   async function getMission() {
     try {
-      const result = await fetch(`${url}/missions/${id}`);
+      const userId = getOrCreateUserId()
+      const result = await fetch(`${url}/missions/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json", "x-user-id": userId },
+      });
       const jsonData = await result.json();
       setMission(jsonData);
     } catch (err) {
@@ -35,7 +40,8 @@ export default function TabPanel(props) {
     props.onDelete();
     try {
       const result = await fetch(`${url}/missions/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: { "x-user-id": userId },
       });
       props.missionRefresher();
     } catch (err) {
@@ -57,7 +63,5 @@ export default function TabPanel(props) {
         <button onClick={changeEditStatus} className="action-btn">Editar Misión</button>
       </div>
     </div>
-
   );
-
 };

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+import getOrCreateUserId from "../utils/userId";
+const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
 export default function MissionTabPanel(props) {
     const [missions, setMissions] = useState([]);
 
     async function getMissions() {
         try {
-            const result = await fetch(`${url}/missions`);
+            const userId = getOrCreateUserId()
+            const result = await fetch(`${URL}/missions`, {
+                method: 'GET',
+                headers: { "Content-Type": "application/json", "x-user-id": userId },
+            });
             const jsonData = await result.json();
             setMissions(jsonData);
         } catch (err) {
@@ -31,6 +36,6 @@ export default function MissionTabPanel(props) {
                     {missionItem.title}
                 </button>
             ))}
-        </div >
+        </div>
     )
 }

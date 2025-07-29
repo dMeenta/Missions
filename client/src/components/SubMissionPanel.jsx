@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SubMission from "./SubMission";
+import getOrCreateUserId from "../utils/userId";
 const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
 export default function SubMissionPanel(props) {
@@ -7,7 +8,11 @@ export default function SubMissionPanel(props) {
 
     async function getSubMissions() {
         try {
-            const result = await fetch(`${url}/sub/${props.id}`);
+            const userId = getOrCreateUserId()
+            const result = await fetch(`${url}/sub/${props.id}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json", "x-user-id": userId },
+            });
             const jsonData = await result.json();
             setSubmissions(jsonData);
         } catch (err) {

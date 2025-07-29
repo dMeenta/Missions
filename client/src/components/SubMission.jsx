@@ -11,8 +11,10 @@ export default function SubMission(props) {
     async function deleteSubmission() {
         setDone();
         try {
+            const userId = getOrCreateUserId()
             const result = await fetch(`${url}/sub/${props.id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: { "x-user-id": userId },
             });
         } catch (err) {
             console.log(err);
